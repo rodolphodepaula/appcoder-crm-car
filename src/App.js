@@ -2,10 +2,11 @@ import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blue } from "@mui/material/colors";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { FaUser } from 'react-icons/fa';
+import Routes from "./Routes";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const theme = createTheme({
-  // Aqui você pode customizar seu tema
   palette: {
     primary: {
       main: blue[500],
@@ -14,27 +15,29 @@ const theme = createTheme({
       main: '#edf2ff',
     },
   },
-  components:{
-    /* MuiTextField: {
+  components: {
+    // Customização global para TextField
+    MuiTextField: {
       defaultProps: {
         variant: 'outlined',
-        fullWidth: true
-      }
+        fullWidth: true,
+      },
     },
+    // Customização global para Select
     MuiSelect: {
       defaultProps: {
         variant: 'outlined',
         fullWidth: true,
       },
-    } */
-  }
+    },
+  },
 });
 
 const App = () => (
+  <><Provider store={store} />
   <ThemeProvider theme={theme}>
-    <h1 className="text-danger">Aplicação React</h1>
-    <FaUser style={{fontSize: '60px', color: 'red'}}/>
-  </ThemeProvider>
+    <Routes />
+  </ThemeProvider></>
 );
 
 export default App;
